@@ -29,3 +29,19 @@
 - further development
 
 **Commit 2**
+
+## src/App.js
+
+- further development
+- add file `src/custom.css`
+
+**Commit 3**
+
+- enter 'm' in input box ...
+
+## Notes
+
+- `node-modules` folder deleted to save space; need to run `$npm install` first
+- through out the progress, keep the server running (leave alone the terminal where `npm start` executed)
+
+- two tutorial from [PedroTech](https://www.youtube.com/watch?v=mZvKPtH9Fzo) on Search Bar with a filter

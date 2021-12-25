@@ -1,5 +1,6 @@
 import './App.css';
-import React from 'react'
+import './custom.css';
+import React from 'react';
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 
@@ -17,6 +18,11 @@ function App() {
   }
   loadUsers();
 }, [])
+
+  const onSuggestHandler = (text) => {
+    setText(text);
+    setSuggests([]);
+  }
 
   const onChangeHandler = (text) => {
     let matches = []
@@ -38,9 +44,19 @@ function App() {
       <input type="text" className = "col-md-12" style= {{marginTop: 10}}
         onChange = {e => onChangeHandler(e.target.value)}
         value = {text}
+
+        onBlur={() => {
+          setTimeout(() => {
+            setSuggests([])
+          },100);
+        }} // so if we click anywhere else, the suggetions will disappear
+        // if we only use setSuggests([]), without timeout feature, we won't be even fast enough to pick the suggestion
         />
       {suggestions && suggestions.map((suggestion,i) => 
-        <div key = {i}>{suggestion.email}</div>
+        <div key = {i} className="suggestion col-md-12 justify-content-md-center" 
+        onClick={() => onSuggestHandler(suggestion.email)}>
+          {suggestion.email}
+        </div>
       )}
     </div>
   );
