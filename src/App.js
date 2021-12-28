@@ -1,7 +1,6 @@
 import './App.css';
 import './custom.css';
 import React from 'react';
-import axios from 'axios';
 import {useEffect, useState} from 'react';
 
 function App() {
@@ -11,12 +10,8 @@ function App() {
   const [suggestions, setSuggests] = useState([])
 
   useEffect(() => {
-  const loadUsers = async() => {
-    const response = await axios.get('https://reqres.in/api/users')
-    //console.log(response.data)
-    setUsers(response.data.data)
-  }
-  loadUsers();
+    const data = require('./MOCK_DATA.json');
+    setUsers(data)
 }, [])
 
   const onSuggestHandler = (text) => {
@@ -29,7 +24,7 @@ function App() {
     if (text.length > 0) {
       matches = users.filter(user => {
         const regex = new RegExp(`${text}`, "gi") //"gi": case insensitive
-        return user.email.match(regex)
+        return user.description.match(regex)
       })
     }
     //console.log('matches: ', matches)
@@ -54,8 +49,8 @@ function App() {
         />
       {suggestions && suggestions.map((suggestion,i) => 
         <div key = {i} className="suggestion col-md-12 justify-content-md-center" 
-        onClick={() => onSuggestHandler(suggestion.email)}>
-          {suggestion.email}
+        onClick={() => onSuggestHandler(suggestion.description)}>
+          {suggestion.description}
         </div>
       )}
     </div>

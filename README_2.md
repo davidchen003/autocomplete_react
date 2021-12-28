@@ -45,3 +45,11 @@
 - through out the progress, keep the server running (leave alone the terminal where `npm start` executed)
 
 - two tutorial from [PedroTech](https://www.youtube.com/watch?v=mZvKPtH9Fzo) on Search Bar with a filter
+
+## use local JSON data file
+
+- and changed text field from "email" to "description"
+
+- however, can't search a text having both "wordA" and "wordB" by typing in "wordA wordB" (which will be treated as search for a big word "wordA wordB")
+
+**Commit 4**
