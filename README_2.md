@@ -53,3 +53,15 @@
 - however, can't search a text having both "wordA" and "wordB" by typing in "wordA wordB" (which will be treated as search for a big word "wordA wordB")
 
 **Commit 4**
+
+## texts contain ANY of the searching terms
+
+- auto-suggestion starts with search entry 4 letter or longer
+- suto-suggest matching text that contain ANY of the search words
+- button `Click for suggestions contain ALL the searching words` for matching suggestions that conain ALL the searching words:
+
+  - as you entering "term1 diam", and finally click the button see the suggestions change along the way
+
+- took out the **onBlur** function (when click elsewhere, the suggestions will disappear), otherwise, the `Click for suggestions contain ALL the searching words` button only works on 2nd click.
+
+**Commit 5**

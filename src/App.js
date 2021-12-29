@@ -21,31 +21,45 @@ function App() {
 
   const onChangeHandler = (text) => {
     let matches = []
-    if (text.length > 0) {
+    let searchTerms = text.trim().toLowerCase().split(' ') // separate searching words
+    if (text.length > 3) { // no action for input < 4 letter
       matches = users.filter(user => {
-        const regex = new RegExp(`${text}`, "gi") //"gi": case insensitive
-        return user.description.match(regex)
+        return searchTerms.some(term => user.description.toLowerCase().includes(term))
       })
     }
-    //console.log('matches: ', matches)
     setSuggests(matches)
     setText(text)
+  }
 
+  const searchAllHandler = (text) => {
+    let matches = []
+    let searchTerms = text.trim().toLowerCase().split(' ') // separate searching words
+    matches = users.filter(user => {
+        return searchTerms.every(term => user.description.toLowerCase().includes(term))
+      })
+    setSuggests(matches)
   }
 
   return (
     <div className="container"> 
-      <div>This is the text you entered: {text}</div>
+      <div>This is your input: {text}</div>
+      <div>
+          <button onClick = {() => searchAllHandler(text)}>
+            Click for suggestions contain ALL the searching words
+          </button>
+      </div>
       <input type="text" className = "col-md-12" style= {{marginTop: 10}}
         onChange = {e => onChangeHandler(e.target.value)}
         value = {text}
 
+/*         // take out this function because it requires click the button "Click for suggestions contain ALL the searching words" twice to make it work
         onBlur={() => {
           setTimeout(() => {
             setSuggests([])
           },100);
-        }} // so if we click anywhere else, the suggetions will disappear
-        // if we only use setSuggests([]), without timeout feature, we won't be even fast enough to pick the suggestion
+        }} 
+        // so if we click anywhere else, the suggetions will disappear
+        // if we only use setSuggests([]), without timeout feature, we won't be even fast enough to pick the suggestion */
         />
       {suggestions && suggestions.map((suggestion,i) => 
         <div key = {i} className="suggestion col-md-12 justify-content-md-center" 
